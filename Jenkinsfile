@@ -12,4 +12,9 @@ pipeline { agent any
        }
     }
   }  
+          post {
+            success {
+              archiveArtifacts artifacts: rectangle.jar, fingerprint: true
+            }
+          }
 }
