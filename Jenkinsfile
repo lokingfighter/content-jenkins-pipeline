@@ -1,9 +1,12 @@
-pipeline { agent any
-  stages { stage('build') {
-    steps {
-      sh 'javac -d . src/*.java'
-      sh 'echo Main-Class: Rectangulator > MANIFEST.MF' 
-      sh 'jar -cvmf MANIFEST.MF rectangle.jar *.class'
+pipeline { 
+  agent any
+    stages { 
+      stage('build') {
+        steps {
+          sh 'echo building'
+          sh 'javac -d . src/*.java'
+          sh 'echo Main-Class: Rectangulator > MANIFEST.MF' 
+          sh 'jar -cvmf MANIFEST.MF rectangle.jar *.class'
       }
     }
       stage('run') {
@@ -17,4 +20,4 @@ pipeline { agent any
               archiveArtifacts artifacts: 'rectangle.jar', fingerprint: true
             }
           }
-}
+      }
